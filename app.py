@@ -8,7 +8,7 @@ app = Flask(__name__)
 def stock_info():
     symbol = request.args.get("symbol", default="AAPL", type=str)
     stock = yf.Ticker(symbol)
-    
+
     fin = stock.financials
     info = stock.info
 
