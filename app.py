@@ -1,15 +1,12 @@
 from flask import Flask, request, jsonify
 import yfinance as yf
+import os
 
 app = Flask(__name__)
 
-@app.route('/')
-def index():
-    return 'Stock API is running'
-
-@app.route('/stockinfo', methods=['GET'])
+@app.route("/stockinfo", methods=["GET"])
 def stock_info():
-    symbol = request.args.get('symbol', default='AAPL', type=str)
+    symbol = request.args.get("symbol", default="AAPL", type=str)
     stock = yf.Ticker(symbol)
     
     fin = stock.financials
@@ -26,8 +23,9 @@ def stock_info():
         "net_income": f"{net_income:,}",
         "eps": latest_eps,
         "pe_ratio": pe_ratio,
-        "message": f"คุณกำลังดูข้อมูลของ {symbol}"
+        "message": f"ดึงข้อมูล {symbol} เรียบร้อย"
     })
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
