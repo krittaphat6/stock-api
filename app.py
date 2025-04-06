@@ -26,7 +26,7 @@ def stock_info():
         "net_income": f"{net_income:,}",
         "eps": latest_eps,
         "pe_ratio": pe_ratio,
-        "message": f"คำนวนหุ้น {symbol} เรียบร้อย"
+        "message": f"ดึงข้อมูลหุ้น {symbol} เสร็จแล้ว"
     })
 
 if __name__ == '__main__':
