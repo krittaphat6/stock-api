@@ -12,13 +12,13 @@ def stock_info():
     symbol = request.args.get('symbol', default='AAPL', type=str)
     stock = yf.Ticker(symbol)
 
-    fin = stock.financials
-    info = stock.info
+    financials = stock.financials
+    stock_data = stock.info
 
-    latest_eps = info.get("trailingEps", "N/A")
-    pe_ratio = info.get("trailingPE", "N/A")
-    revenue = fin.loc["Total Revenue"][0] if "Total Revenue" in fin.index else "N/A"
-    net_income = fin.loc["Net Income"][0] if "Net Income" in fin.index else "N/A"
+    latest_eps = stock_data.get("trailingEps", "N/A")
+    pe_ratio = stock_data.get("trailingPE", "N/A")
+    revenue = financials.loc["Total Revenue"][0] if "Total Revenue" in financials.index else "N/A"
+    net_income = financials.loc["Net Income"][0] if "Net Income" in financials.index else "N/A"
 
     return jsonify({
         "symbol": symbol,
