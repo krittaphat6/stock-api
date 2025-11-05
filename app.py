@@ -22,8 +22,8 @@ def stock_info():
 
     return jsonify({
         "symbol": symbol,
-        "revenue": f"{revenue:,}",
-        "net_income": f"{net_income:,}",
+        "revenue": f"{revenue:,}" if isinstance(revenue, (int, float)) else revenue,
+        "net_income": f"{net_income:,}" if isinstance(net_income, (int, float)) else net_income,
         "eps": latest_eps,
         "pe_ratio": pe_ratio,
         "message": f"ดึงข้อมูลหุ้น {symbol} เสร็จแล้ว"
